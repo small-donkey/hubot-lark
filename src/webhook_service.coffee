@@ -29,6 +29,7 @@ class WebhookService
       cipher = new Cipher @config.encrypt_key
       body = cipher.decrypt req.body.encrypt
       data = JSON.parse body
+      msg = JSON.parse data.event.message.content
 
       if data.challenge?
         res.send { challenge: data.challenge }
@@ -41,7 +42,7 @@ class WebhookService
       )
       message = new TextMessage(
         user,
-        data.event.message.content,
+        msg.text,
         data.event.message.message_id
       )
       @robot.receive message
