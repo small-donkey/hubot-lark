@@ -29,12 +29,16 @@ class WebhookService
       cipher = new Cipher @config.encrypt_key
       body = cipher.decrypt req.body.encrypt
       data = JSON.parse body
-      msg = JSON.parse data.event.message.content
 
       if data.challenge?
         res.send { challenge: data.challenge }
         return
-
+      
+      try
+        msg = JSON.parse data.event.message.content
+      catch
+        return
+      
       user = new User(
         data.event.sender.sender_id.open_id,
         name: data.event.sender.sender_id.open_id,
