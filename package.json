@@ -18,9 +18,6 @@
         "qs": "^6.9.4",
         "request": "^2.88.2"
     },
-    "peerDependencies": {
-        "hubot": "^3.3.2"
-    },
     "devDependencies": {
         "coffee-script": ">=1.2.0"
     },
