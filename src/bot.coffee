@@ -1,9 +1,9 @@
 
 try
-  { Robot, Adapter, TextMessage, User } = require 'hubot'
+  { Robot, Adapter, TextMessage, User } = require 'hubot/es2015'
 catch
   prequire = require('parent-require')
-  { Robot, Adapter, TextMessage, User } = prequire 'hubot'
+  { Robot, Adapter, TextMessage, User } = prequire 'hubot/es2015'
 
 _ = require "lodash"
 LarkApiClient = require './lark_api_client'
@@ -12,7 +12,7 @@ WebhookService = require './webhook_service'
 
 class LarkBot extends Adapter
   constructor: (@robot, @options) ->
-    super
+    super()
     @lark = new LarkApiClient(@options.api_id, @options.api_secret)
 
   send: (envelope, strings...) ->
